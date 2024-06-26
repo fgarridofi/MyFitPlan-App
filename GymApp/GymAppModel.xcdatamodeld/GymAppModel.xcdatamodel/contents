@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23D60" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="CDExercise" representedClassName="CDExercise" syncable="YES" codeGenerationType="class">
+        <attribute name="bodypart" attributeType="String"/>
+        <attribute name="equipment" attributeType="String"/>
+        <attribute name="gifUrl" attributeType="String"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="target" attributeType="String"/>
+        <relationship name="routineExercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDRoutineExercise" inverseName="exercise" inverseEntity="CDRoutineExercise"/>
+    </entity>
+    <entity name="CDExerciseRow" representedClassName="CDExerciseRow" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="reps" optional="YES" attributeType="String"/>
+        <attribute name="serie" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="weight" optional="YES" attributeType="String"/>
+        <relationship name="routineExercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDRoutineExercise" inverseName="exerciseRows" inverseEntity="CDRoutineExercise"/>
+    </entity>
+    <entity name="CDRoutine" representedClassName="CDRoutine" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="routineExercise" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDRoutineExercise" inverseName="routine" inverseEntity="CDRoutineExercise"/>
+    </entity>
+    <entity name="CDRoutineExercise" representedClassName="CDRoutineExercise" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDExercise" inverseName="routineExercise" inverseEntity="CDExercise"/>
+        <relationship name="exerciseRows" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDExerciseRow" inverseName="routineExercise" inverseEntity="CDExerciseRow"/>
+        <relationship name="routine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDRoutine" inverseName="routineExercise" inverseEntity="CDRoutine"/>
+    </entity>
+</model>
